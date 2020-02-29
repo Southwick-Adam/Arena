@@ -4,13 +4,14 @@ export (PackedScene) var Enemy
 export (PackedScene) var Item
 var enemy_count = 0
 var max_enemy_count = 6
+var two_chance = 0.8
 
 func _ready():
 	randomize()
 
 func _on_EnemyTimer_timeout():
 	var num_rng = randf()
-	if num_rng > .75:
+	if num_rng > two_chance:
 		_spawn()
 	_spawn()
 	$EnemyTimer.set_wait_time(rand_range(1.5, 3))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/pixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/UI/x.png" type="Texture" id=2]
@@ -8,20 +8,21 @@
 [ext_resource path="res://assets/UI/no ads.png" type="Texture" id=6]
 [ext_resource path="res://assets/UI/fonts/GlacialIndifference-Italic.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/UI/info.png" type="Texture" id=8]
+[ext_resource path="res://assets/blood_wo.png" type="Texture" id=9]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=1]
 size = 25
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 7 )
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=2]
 radius = 25.0
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=3]
 radius = 25.0
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=4]
 size = 25
 use_mipmaps = true
 use_filter = true
@@ -49,7 +50,7 @@ margin_left = -32.6737
 margin_top = 22.0443
 margin_right = 340.326
 margin_bottom = 53.0443
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "$0.99"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -89,7 +90,7 @@ margin_left = -30.3024
 margin_top = 22.8911
 margin_right = 342.698
 margin_bottom = 53.8911
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "$1.99"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -114,7 +115,7 @@ margin_left = -31.9614
 margin_top = 39.337
 margin_right = 341.039
 margin_bottom = 70.337
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "$0.99"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -122,7 +123,7 @@ __meta__ = {
 
 [node name="x" type="TouchScreenButton" parent="."]
 position = Vector2( 35, 35 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 shape_centered = false
 
 [node name="sprite" type="Sprite" parent="x"]
@@ -131,14 +132,26 @@ position = Vector2( 0.297737, -0.148893 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="x/sprite"]
+modulate = Color( 0.168627, 0.168627, 0.168627, 1 )
+show_behind_parent = true
+scale = Vector2( 19, 19 )
+texture = ExtResource( 9 )
+
 [node name="info" type="TouchScreenButton" parent="."]
-position = Vector2( 35, 448.637 )
-shape = SubResource( 6 )
+position = Vector2( 45, 434.164 )
+shape = SubResource( 3 )
 shape_centered = false
 
 [node name="Sprite" type="Sprite" parent="info"]
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="info/Sprite"]
+modulate = Color( 0.168627, 0.168627, 0.168627, 1 )
+show_behind_parent = true
+scale = Vector2( 13.5714, 13.5714 )
+texture = ExtResource( 9 )
 
 [node name="filter" type="Sprite" parent="."]
 modulate = Color( 0.207843, 0.207843, 0.207843, 0.392157 )
@@ -156,7 +169,7 @@ margin_left = -471.968
 margin_top = 5.19786
 margin_right = -270.968
 margin_bottom = 104.198
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 4 )
 text = "Unlock the
 next God in 
 the Temple"
@@ -167,7 +180,7 @@ __meta__ = {
 [node name="Label2" type="Label" parent="labels"]
 margin_right = 201.0
 margin_bottom = 133.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 4 )
 text = "Unlock all
 remaining Gods
 in the Temple"
@@ -180,7 +193,7 @@ margin_left = -395.039
 margin_top = 192.322
 margin_right = -194.039
 margin_bottom = 325.322
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 4 )
 text = "Remove all
 automatic ads
 permanantly"
@@ -193,7 +206,7 @@ margin_left = -94.6014
 margin_top = 190.243
 margin_right = 106.399
 margin_bottom = 323.242
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 4 )
 text = "Rewarded ads
 will still be
 available"

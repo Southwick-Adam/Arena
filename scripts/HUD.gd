@@ -107,6 +107,7 @@ func _on_ult_bttn_pressed():
 		sound._set_sound("timp")
 		$MC/bottomR/buttons/ult.hide()
 		player._ult()
+		get_node("/root/main/spawner").two_chance -= .1
 
 func _game_over():
 	game_over = true
