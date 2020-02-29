@@ -1,0 +1,430 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
+[ext_resource path="res://scenes/sounds.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/UI/glassPanel.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/squareWhite.png" type="Texture" id=4]
+[ext_resource path="res://assets/blood_wo.png" type="Texture" id=5]
+[ext_resource path="res://assets/UI/bar.png" type="Texture" id=6]
+[ext_resource path="res://assets/pixel.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/button_.png" type="Texture" id=8]
+[ext_resource path="res://assets/UI/bow.png" type="Texture" id=9]
+[ext_resource path="res://assets/UI/arrow_shadow.png" type="Texture" id=10]
+[ext_resource path="res://assets/UI/shield_shadow.png" type="Texture" id=11]
+[ext_resource path="res://assets/UI/fonts/GlacialIndifference-Italic.otf" type="DynamicFontData" id=12]
+[ext_resource path="res://assets/UI/base.png" type="Texture" id=13]
+[ext_resource path="res://assets/UI/knob.png" type="Texture" id=14]
+[ext_resource path="res://assets/UI/settings.png" type="Texture" id=15]
+[ext_resource path="res://assets/UI/sound.png" type="Texture" id=16]
+[ext_resource path="res://assets/UI/music.png" type="Texture" id=17]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.554127 ), -1.59974, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 12, 12, 1 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, -98, 0 )
+initial_velocity = 4.0
+initial_velocity_random = 0.5
+angular_velocity = 1.0
+angular_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel_random = 0.6
+scale = 0.8
+scale_random = 0.6
+scale_curve = SubResource( 2 )
+color = Color( 0.278431, 0.0705882, 0.0705882, 1 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 42, 41 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 12 )
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 20.0
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Sounds = ExtResource( 2 )
+
+[node name="MC" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 20.0
+margin_right = -15.0
+margin_bottom = -10.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="left" type="HBoxContainer" parent="MC"]
+margin_right = 695.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="space" type="VBoxContainer" parent="MC/left"]
+margin_right = 10.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="health" type="VBoxContainer" parent="MC/left"]
+margin_left = 14.0
+margin_right = 144.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="glass" type="NinePatchRect" parent="MC/left/health"]
+margin_right = 130.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 45 )
+texture = ExtResource( 3 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MC" type="MarginContainer" parent="MC/left/health/glass"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+
+[node name="H" type="HBoxContainer" parent="MC/left/health/glass/MC"]
+margin_right = 120.0
+margin_bottom = 45.0
+
+[node name="V1" type="VBoxContainer" parent="MC/left/health/glass/MC/H"]
+margin_right = 19.0
+margin_bottom = 45.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MC/left/health/glass/MC/H/V1"]
+modulate = Color( 0.968627, 0.329412, 0.329412, 1 )
+margin_top = 9.0
+margin_right = 19.0
+margin_bottom = 35.0
+texture = ExtResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="MC/left/health/glass/MC/H/V1"]
+show_behind_parent = true
+position = Vector2( 9.24484, 22.641 )
+emitting = false
+amount = 20
+lifetime = 0.9
+process_material = SubResource( 3 )
+texture = ExtResource( 5 )
+
+[node name="V2" type="VBoxContainer" parent="MC/left/health/glass/MC/H"]
+margin_left = 23.0
+margin_right = 42.0
+margin_bottom = 45.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MC/left/health/glass/MC/H/V2"]
+modulate = Color( 0.968627, 0.329412, 0.329412, 1 )
+margin_top = 9.0
+margin_right = 19.0
+margin_bottom = 35.0
+texture = ExtResource( 4 )
+
+[node name="V3" type="VBoxContainer" parent="MC/left/health/glass/MC/H"]
+margin_left = 46.0
+margin_right = 65.0
+margin_bottom = 45.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MC/left/health/glass/MC/H/V3"]
+modulate = Color( 0.968627, 0.329412, 0.329412, 1 )
+margin_top = 9.0
+margin_right = 19.0
+margin_bottom = 35.0
+texture = ExtResource( 4 )
+
+[node name="V4" type="VBoxContainer" parent="MC/left/health/glass/MC/H"]
+margin_left = 69.0
+margin_right = 88.0
+margin_bottom = 45.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MC/left/health/glass/MC/H/V4"]
+modulate = Color( 0.968627, 0.329412, 0.329412, 1 )
+margin_top = 9.0
+margin_right = 19.0
+margin_bottom = 35.0
+texture = ExtResource( 4 )
+
+[node name="V5" type="VBoxContainer" parent="MC/left/health/glass/MC/H"]
+margin_left = 92.0
+margin_right = 111.0
+margin_bottom = 45.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MC/left/health/glass/MC/H/V5"]
+modulate = Color( 0.968627, 0.329412, 0.329412, 1 )
+margin_top = 9.0
+margin_right = 19.0
+margin_bottom = 35.0
+texture = ExtResource( 4 )
+
+[node name="pwr_up_bars" type="VBoxContainer" parent="MC/left"]
+margin_left = 148.0
+margin_right = 248.0
+margin_bottom = 450.0
+
+[node name="space" type="HBoxContainer" parent="MC/left/pwr_up_bars"]
+margin_right = 100.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 0, 1 )
+
+[node name="bolts" type="NinePatchRect" parent="MC/left/pwr_up_bars"]
+self_modulate = Color( 0.72549, 0.458824, 0.0784314, 1 )
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 100, 15 )
+texture = ExtResource( 6 )
+
+[node name="bar" type="NinePatchRect" parent="MC/left/pwr_up_bars/bolts"]
+self_modulate = Color( 1, 0.756863, 0.294118, 1 )
+show_behind_parent = true
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 0, 9 )
+texture = ExtResource( 7 )
+
+[node name="shield" type="NinePatchRect" parent="MC/left/pwr_up_bars"]
+self_modulate = Color( 0.0901961, 0.247059, 0.627451, 1 )
+margin_top = 24.0
+margin_right = 100.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 100, 15 )
+texture = ExtResource( 6 )
+
+[node name="bar" type="NinePatchRect" parent="MC/left/pwr_up_bars/shield"]
+self_modulate = Color( 0.388235, 0.541176, 1, 1 )
+show_behind_parent = true
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 12.0
+texture = ExtResource( 7 )
+
+[node name="bottomR" type="HBoxContainer" parent="MC"]
+margin_right = 695.0
+margin_bottom = 450.0
+alignment = 2
+
+[node name="buttons" type="VBoxContainer" parent="MC/bottomR"]
+margin_left = 615.0
+margin_right = 695.0
+margin_bottom = 450.0
+alignment = 2
+
+[node name="ult" type="NinePatchRect" parent="MC/bottomR/buttons"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.45098 )
+margin_top = 202.0
+margin_right = 80.0
+margin_bottom = 282.0
+rect_min_size = Vector2( 80, 80 )
+mouse_filter = 1
+texture = ExtResource( 8 )
+
+[node name="icon" type="NinePatchRect" parent="MC/bottomR/buttons/ult"]
+self_modulate = Color( 1, 1, 1, 0.54902 )
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+mouse_filter = 1
+texture = ExtResource( 9 )
+
+[node name="ult_bttn" type="TouchScreenButton" parent="MC/bottomR/buttons/ult"]
+position = Vector2( 39.1228, 39.4697 )
+shape = SubResource( 4 )
+shape_centered = false
+
+[node name="ult_bar" type="NinePatchRect" parent="MC/bottomR/buttons"]
+modulate = Color( 1, 1, 1, 0.45098 )
+self_modulate = Color( 0.698039, 0.698039, 0.698039, 1 )
+margin_left = 5.0
+margin_top = 272.0
+margin_right = 74.0
+margin_bottom = 282.0
+rect_min_size = Vector2( 69, 10 )
+size_flags_horizontal = 4
+texture = ExtResource( 6 )
+
+[node name="bar" type="NinePatchRect" parent="MC/bottomR/buttons/ult_bar"]
+show_behind_parent = true
+margin_left = 2.40784
+margin_top = 2.0
+margin_right = 67.4078
+margin_bottom = 8.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 1049, 86, 0, 1 )
+
+[node name="bolt" type="NinePatchRect" parent="MC/bottomR/buttons"]
+self_modulate = Color( 0.305882, 0.768627, 0.831373, 0.45098 )
+margin_top = 286.0
+margin_right = 80.0
+margin_bottom = 366.0
+rect_min_size = Vector2( 80, 80 )
+mouse_filter = 1
+texture = ExtResource( 8 )
+
+[node name="icon" type="NinePatchRect" parent="MC/bottomR/buttons/bolt"]
+self_modulate = Color( 1, 1, 1, 0.54902 )
+margin_left = 10.8301
+margin_top = 9.92749
+margin_right = 70.8301
+margin_bottom = 69.9275
+rect_min_size = Vector2( 60, 60 )
+mouse_filter = 1
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bolt_bttn" type="TouchScreenButton" parent="MC/bottomR/buttons/bolt"]
+shape = SubResource( 4 )
+
+[node name="shield" type="NinePatchRect" parent="MC/bottomR/buttons"]
+self_modulate = Color( 0.305882, 0.768627, 0.831373, 0.45098 )
+margin_top = 370.0
+margin_right = 80.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 80, 80 )
+texture = ExtResource( 8 )
+
+[node name="icon" type="NinePatchRect" parent="MC/bottomR/buttons/shield"]
+self_modulate = Color( 1, 1, 1, 0.54902 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 80 )
+texture = ExtResource( 11 )
+
+[node name="shield_bttn" type="TouchScreenButton" parent="MC/bottomR/buttons/shield"]
+shape = SubResource( 4 )
+
+[node name="space" type="HBoxContainer" parent="MC/bottomR/buttons"]
+visible = false
+margin_top = 449.0
+margin_right = 80.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 0, 1 )
+
+[node name="center" type="HBoxContainer" parent="MC"]
+margin_right = 695.0
+margin_bottom = 450.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MC/center"]
+margin_left = 341.0
+margin_right = 354.0
+margin_bottom = 450.0
+
+[node name="number" type="Label" parent="MC/center/VBoxContainer"]
+margin_right = 13.0
+margin_bottom = 61.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.866667, 0.866667, 0.866667, 1 )
+text = "0
+"
+align = 1
+valign = 1
+
+[node name="bottomL" type="HBoxContainer" parent="MC"]
+margin_right = 695.0
+margin_bottom = 450.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MC/bottomL"]
+margin_bottom = 450.0
+alignment = 2
+
+[node name="base" type="Sprite" parent="MC/bottomL/VBoxContainer"]
+self_modulate = Color( 0.305882, 0.768627, 0.831373, 0.45098 )
+position = Vector2( 84.1, 364.301 )
+texture = ExtResource( 13 )
+
+[node name="knob" type="Sprite" parent="MC/bottomL/VBoxContainer/base"]
+modulate = Color( 0.174072, 0.603677, 0.71875, 0.784314 )
+rotation = 0.785398
+scale = Vector2( 0.65, 0.65 )
+texture = ExtResource( 14 )
+
+[node name="Timer_bolt" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -50.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0.627451 )
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 15 )
+
+[node name="settings" type="TouchScreenButton" parent="VBoxContainer/NinePatchRect"]
+position = Vector2( 25.9751, 25.2235 )
+shape = SubResource( 6 )
+shape_centered = false
+
+[node name="sound" type="NinePatchRect" parent="VBoxContainer"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_top = 54.0
+margin_right = 50.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 16 )
+
+[node name="button" type="TouchScreenButton" parent="VBoxContainer/sound"]
+position = Vector2( 26.9252, 26.0234 )
+shape = SubResource( 6 )
+shape_centered = false
+
+[node name="music" type="NinePatchRect" parent="VBoxContainer"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_top = 54.0
+margin_right = 50.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 17 )
+
+[node name="m_button" type="TouchScreenButton" parent="VBoxContainer/music"]
+position = Vector2( 27.8751, 24.9233 )
+shape = SubResource( 6 )
+shape_centered = false
+[connection signal="pressed" from="MC/bottomR/buttons/ult/ult_bttn" to="." method="_on_ult_bttn_pressed"]
+[connection signal="pressed" from="MC/bottomR/buttons/bolt/bolt_bttn" to="." method="_on_bolt_bttn_pressed"]
+[connection signal="pressed" from="MC/bottomR/buttons/shield/shield_bttn" to="." method="_on_shield_bttn_pressed"]
+[connection signal="released" from="MC/bottomR/buttons/shield/shield_bttn" to="." method="_on_shield_bttn_released"]
+[connection signal="timeout" from="Timer_bolt" to="." method="_on_Timer_bolt_timeout"]
+[connection signal="pressed" from="VBoxContainer/NinePatchRect/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/sound/button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/music/m_button" to="." method="_on_m_button_pressed"]

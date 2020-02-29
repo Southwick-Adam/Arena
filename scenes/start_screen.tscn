@@ -1,0 +1,209 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scripts/start_screen.gd" type="Script" id=1]
+[ext_resource path="res://scenes/temple.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/UI/panelInset_beigeLight.png.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/fonts/GlacialIndifference-Italic.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/blood_wo.png" type="Texture" id=5]
+[ext_resource path="res://assets/UI/buttonLong_beige.png" type="Texture" id=6]
+[ext_resource path="res://assets/sounds/music/start_screen.ogg" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+outline_size = 1
+outline_color = Color( 0.792157, 0.698039, 0.588235, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 125, 60 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 38
+outline_size = 1
+outline_color = Color( 0.792157, 0.698039, 0.588235, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 125, 30 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 30
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 4 )
+
+[node name="start_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Temple = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+margin_top = 80.0
+margin_right = -200.0
+margin_bottom = -80.0
+
+[node name="back" type="NinePatchRect" parent="MarginContainer"]
+margin_right = 320.0
+margin_bottom = 320.0
+texture = ExtResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 320.0
+margin_bottom = 320.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 35.0
+margin_right = 285.0
+margin_bottom = 320.0
+alignment = 1
+
+[node name="space2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="score" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 250.0
+margin_bottom = 149.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="text" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/score"]
+margin_top = 12.0
+margin_right = 250.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.988235, 0.980392, 0.968627, 1 )
+text = "SCORE :"
+align = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/VBoxContainer/score/text"]
+self_modulate = Color( 0.505882, 0.419608, 0.247059, 0.392157 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+
+[node name="score" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/score"]
+margin_top = 64.0
+margin_right = 250.0
+margin_bottom = 112.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.988235, 0.980392, 0.968627, 1 )
+text = "3506"
+align = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/VBoxContainer/score/score"]
+self_modulate = Color( 0.505882, 0.419608, 0.247059, 0.392157 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+
+[node name="score_btn" type="TouchScreenButton" parent="MarginContainer/HBoxContainer/VBoxContainer/score"]
+shape = SubResource( 2 )
+
+[node name="start" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 153.0
+margin_right = 250.0
+margin_bottom = 213.0
+rect_min_size = Vector2( 0, 60 )
+alignment = 2
+
+[node name="start" type="NinePatchRect" parent="MarginContainer/HBoxContainer/VBoxContainer/start"]
+margin_right = 250.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 250, 60 )
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/start/start"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.988235, 0.980392, 0.968627, 1 )
+text = "START"
+align = 1
+valign = 1
+
+[node name="start_btn" type="TouchScreenButton" parent="MarginContainer/HBoxContainer/VBoxContainer/start"]
+shape = SubResource( 4 )
+
+[node name="space3" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 217.0
+margin_right = 250.0
+margin_bottom = 222.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="temple" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 226.0
+margin_right = 250.0
+margin_bottom = 286.0
+rect_min_size = Vector2( 0, 60 )
+alignment = 1
+
+[node name="temple" type="NinePatchRect" parent="MarginContainer/HBoxContainer/VBoxContainer/temple"]
+margin_right = 250.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 250, 60 )
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/temple/temple"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.988235, 0.980392, 0.968627, 1 )
+text = "TEMPLE"
+align = 1
+valign = 1
+
+[node name="temple_btn" type="TouchScreenButton" parent="MarginContainer/HBoxContainer/VBoxContainer/temple"]
+shape = SubResource( 4 )
+
+[node name="space" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 290.0
+margin_right = 250.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 320.0
+margin_bottom = 320.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+modulate = Color( 0.662745, 0.768627, 0.282353, 1 )
+margin_right = 320.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 45 )
+custom_fonts/font = SubResource( 5 )
+text = "NEW HIGH SCORE !"
+align = 1
+valign = 1
+
+[node name="Timer" type="Timer" parent="MarginContainer/VBoxContainer"]
+wait_time = 0.5
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 10.0
+autoplay = true
+bus = "music"
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/score/score_btn" to="." method="_on_score_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/start/start_btn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/temple/temple_btn" to="." method="_on_temple_btn_pressed"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/Timer" to="." method="_on_Timer_timeout"]

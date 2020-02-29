@@ -1,0 +1,157 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/save_screen.gd" type="Script" id=1]
+[ext_resource path="res://assets/UI/panelInset_beigeLight.png.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/fonts/GlacialIndifference-Italic.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/blood_wo.png" type="Texture" id=4]
+[ext_resource path="res://assets/UI/video.png" type="Texture" id=5]
+[ext_resource path="res://assets/pixel.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 100, 70 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 350, 40 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 350, 75 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 90, 110 )
+
+[node name="save_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+margin_top = 80.0
+margin_right = -200.0
+margin_bottom = -186.0
+mouse_filter = 1
+
+[node name="back" type="NinePatchRect" parent="MarginContainer"]
+margin_right = 320.0
+margin_bottom = 214.0
+mouse_filter = 1
+texture = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 320.0
+margin_bottom = 214.0
+alignment = 1
+
+[node name="text" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 12.0
+margin_right = 320.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 80 )
+alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/text"]
+modulate = Color( 0.94902, 0.956863, 0.92549, 1 )
+margin_top = 19.0
+margin_right = 320.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 45 )
+custom_fonts/font = SubResource( 1 )
+text = "SAVE ME"
+align = 1
+valign = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/text/Label"]
+self_modulate = Color( 0.505882, 0.419608, 0.247059, 0.537255 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -22.0
+margin_top = -15.0
+margin_right = 26.0
+margin_bottom = 9.0
+texture = ExtResource( 4 )
+
+[node name="buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 202.0
+alignment = 1
+
+[node name="space" type="HBoxContainer" parent="MarginContainer/VBoxContainer/buttons"]
+margin_right = 320.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 0, 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/buttons"]
+margin_top = 6.0
+margin_right = 320.0
+margin_bottom = 106.0
+alignment = 1
+
+[node name="ad" type="TouchScreenButton" parent="MarginContainer/VBoxContainer/buttons/HBoxContainer"]
+position = Vector2( 52, -20 )
+shape = SubResource( 2 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/buttons/HBoxContainer"]
+modulate = Color( 0.560784, 0.509804, 0.427451, 1 )
+margin_left = 110.0
+margin_right = 210.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+mouse_filter = 1
+texture = ExtResource( 5 )
+
+[node name="bar" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 240.0
+margin_top = 305.0
+margin_right = -240.0
+margin_bottom = -159.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="bar"]
+self_modulate = Color( 0.917647, 0.894118, 0.847059, 0.54902 )
+margin_right = 240.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+
+[node name="space1" type="TouchScreenButton" parent="."]
+position = Vector2( 10, 10 )
+shape = SubResource( 3 )
+
+[node name="space2" type="TouchScreenButton" parent="."]
+position = Vector2( 10, 320 )
+shape = SubResource( 4 )
+
+[node name="space3" type="TouchScreenButton" parent="."]
+position = Vector2( 10, 95 )
+shape = SubResource( 5 )
+
+[node name="space4" type="TouchScreenButton" parent="."]
+position = Vector2( 530, 95 )
+shape = SubResource( 5 )
+[connection signal="pressed" from="MarginContainer/VBoxContainer/buttons/HBoxContainer/ad" to="." method="_on_ad_pressed"]
+[connection signal="pressed" from="space1" to="." method="_on_space1_pressed"]
+[connection signal="released" from="space1" to="." method="_on_space1_released"]
+[connection signal="pressed" from="space2" to="." method="_on_space2_pressed"]
+[connection signal="released" from="space2" to="." method="_on_space2_released"]
+[connection signal="pressed" from="space3" to="." method="_on_space3_pressed"]
+[connection signal="released" from="space3" to="." method="_on_space3_released"]
+[connection signal="pressed" from="space4" to="." method="_on_space4_pressed"]
+[connection signal="released" from="space4" to="." method="_on_space4_released"]

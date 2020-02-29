@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/spawner.gd" type="Script" id=1]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/power_up.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -24, -26.2709, 0, 0, 0, 0, 744, -31.2709, 0, 0, 0, 0, 750, 506.729, 0, 0, 0, 0, -24, 497.729, 0, 0, 0, 0, -24, -26.2709 )
+}
+
+[node name="spawner" type="Node2D"]
+script = ExtResource( 1 )
+Enemy = ExtResource( 2 )
+Item = ExtResource( 3 )
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2( -24, -26.2709 )
+rotation = -0.00651041
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="ItemTimer" type="Timer" parent="."]
+wait_time = 15.0
+
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
+[connection signal="timeout" from="ItemTimer" to="." method="_on_ItemTimer_timeout"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/temple.ogg-d47883d375fc0fbc26f5fc504a826aad.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/music/temple.ogg"
+dest_files=[ "res://.import/temple.ogg-d47883d375fc0fbc26f5fc504a826aad.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

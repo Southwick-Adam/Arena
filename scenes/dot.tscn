@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/dot.gd" type="Script" id=1]
+[ext_resource path="res://scenes/sounds.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/blood_wo.png" type="Texture" id=3]
+
+[node name="dot" type="Node2D"]
+script = ExtResource( 1 )
+Sounds = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 0.588235, 0, 0, 1 )
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

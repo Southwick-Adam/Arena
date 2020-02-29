@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/ray.gd" type="Script" id=1]
+[ext_resource path="res://scenes/burn.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/ults/laserBlue01.png" type="Texture" id=3]
+[ext_resource path="res://assets/blood_wo.png" type="Texture" id=4]
+[ext_resource path="res://assets/Fire Particle.png" type="Texture" id=5]
+[ext_resource path="res://assets/sounds/SFX/lazer.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/SFX/fire.wav" type="AudioStream" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.63159, 154.217 )
+
+[sub_resource type="Curve" id=2]
+min_value = 0.3
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.656872, 0.3 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 15, 40, 1 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, -490, 0 )
+initial_velocity = 25.0
+angular_velocity = -12099.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 180.0
+angle_random = 1.0
+scale_curve = SubResource( 3 )
+
+[node name="ray" type="Node2D" groups=[
+"ult",
+]]
+script = ExtResource( 1 )
+Burn = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+position = Vector2( 0.43631, 200.374 )
+scale = Vector2( 1.55288, 7.23761 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2( 0, 194.073 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 0.172549, 0.854902, 0.964706, 0.509804 )
+position = Vector2( 0, -30 )
+scale = Vector2( 15, 15 )
+texture = ExtResource( 4 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+self_modulate = Color( 0.160784, 0.729412, 0.878431, 0.560784 )
+position = Vector2( 0, 19.3476 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.2
+autostart = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0.540375, 37.8252 )
+amount = 50
+lifetime = 0.2
+process_material = SubResource( 4 )
+texture = ExtResource( 5 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = 2.0
+autoplay = true
+bus = "sfx"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+volume_db = -2.0
+autoplay = true
+bus = "sfx"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

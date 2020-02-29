@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/blood.gd" type="Script" id=1]
+[ext_resource path="res://scenes/save_screen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/player/stain.png" type="Texture" id=3]
+
+[node name="blood" type="Node2D"]
+show_behind_parent = true
+z_index = -1
+script = ExtResource( 1 )
+SaveMe = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.396078, 0.0235294, 0.0235294, 0.631373 )
+position = Vector2( -0.478119, 0.281311 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 3 )
+offset = Vector2( 3.8743, -10.0925 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

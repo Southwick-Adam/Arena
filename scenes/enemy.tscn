@@ -1,0 +1,112 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
+[ext_resource path="res://scenes/bolt.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/enemy/body.png" type="Texture" id=3]
+[ext_resource path="res://assets/enemy/eyes.png" type="Texture" id=4]
+[ext_resource path="res://assets/enemy/hat3.png" type="Texture" id=5]
+[ext_resource path="res://assets/terrain/shadow.png" type="Texture" id=6]
+[ext_resource path="res://assets/enemy/hand.png" type="Texture" id=7]
+[ext_resource path="res://assets/weapon/Xbow2.png" type="Texture" id=8]
+[ext_resource path="res://assets/weapon/bolt.png" type="Texture" id=9]
+[ext_resource path="res://assets/sounds/SFX/impact.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/SFX/grunt1.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/enemy/aura.png" type="Texture" id=12]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.7536
+
+[node name="enemy" type="Node2D"]
+script = ExtResource( 1 )
+Bolt = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="." groups=[
+"enemy",
+]]
+collision_layer = 15
+collision_mask = 15
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+self_modulate = Color( 0.643137, 0.392157, 0.235294, 1 )
+rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, -9.5 )
+
+[node name="eyes" type="Sprite" parent="Area2D/Sprite"]
+self_modulate = Color( 0.87451, 0.87451, 0.87451, 1 )
+position = Vector2( 0, -9.53314 )
+texture = ExtResource( 4 )
+
+[node name="hat" type="Sprite" parent="Area2D/Sprite"]
+self_modulate = Color( 0.772549, 0.772549, 0.772549, 1 )
+position = Vector2( 0, -10.3271 )
+texture = ExtResource( 5 )
+
+[node name="shadow" type="Sprite" parent="Area2D/Sprite"]
+self_modulate = Color( 1, 1, 1, 0.823529 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -1
+texture = ExtResource( 6 )
+
+[node name="Xbow" type="Sprite" parent="Area2D/Sprite"]
+show_behind_parent = true
+position = Vector2( -20.6848, 38.4042 )
+rotation = -1.5708
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="Area2D/Sprite/Xbow"]
+self_modulate = Color( 0.498039, 0.333333, 0.333333, 1 )
+rotation = -1.5708
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 8 )
+
+[node name="bolt" type="Sprite" parent="Area2D/Sprite/Xbow"]
+modulate = Color( 0.792157, 0.792157, 0.792157, 1 )
+position = Vector2( -31.0456, 0.251144 )
+rotation = -1.5708
+scale = Vector2( 0.8, 1 )
+texture = ExtResource( 9 )
+
+[node name="aura" type="Sprite" parent="Area2D/Sprite"]
+visible = false
+modulate = Color( 0.694118, 0.415686, 0.882353, 1 )
+position = Vector2( 0.0217171, -9.99516 )
+scale = Vector2( 1, 1.02 )
+z_index = -1
+texture = ExtResource( 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -5.09627, 3.91901e-06 )
+shape = SubResource( 1 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="GameOverTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RespawnBoltTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="AuraTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="impact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = -5.0
+bus = "sfx"
+
+[node name="grunt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -10.0
+bus = "sfx"
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_GameOverTimer_timeout"]
+[connection signal="timeout" from="RespawnBoltTimer" to="." method="_on_RespawnBoltTimer_timeout"]
+[connection signal="timeout" from="AuraTimer" to="." method="_on_AuraTimer_timeout"]

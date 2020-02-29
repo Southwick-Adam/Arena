@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/bolt.gd" type="Script" id=1]
+[ext_resource path="res://scenes/dot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/sounds.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/weapon/bolt.png" type="Texture" id=4]
+[ext_resource path="res://blood.tres" type="Material" id=5]
+[ext_resource path="res://assets/blood_wo.png" type="Texture" id=6]
+[ext_resource path="res://assets/sounds/SFX/whoosh.wav" type="AudioStream" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.16839, 3.96387 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.356812 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 10, 5, 1 )
+flag_disable_z = true
+gravity = Vector3( -98, 0, 0 )
+initial_velocity = 34.48
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 5.0
+linear_accel_random = 0.6
+angle_random = 0.6
+scale = 0.8
+scale_curve = SubResource( 3 )
+
+[node name="bolt" type="Node2D"]
+scale = Vector2( 1.1, 1 )
+script = ExtResource( 1 )
+Dot = ExtResource( 2 )
+Sounds = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+modulate = Color( 0.796078, 0.796078, 0.796078, 1 )
+rotation = 1.5708
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2( -3, 0 )
+shape = SubResource( 1 )
+
+[node name="HitTimer" type="Timer" parent="."]
+wait_time = 0.6
+
+[node name="blood" type="Particles2D" parent="."]
+modulate = Color( 0.505882, 0.0666667, 0.0666667, 1 )
+position = Vector2( 4.8, 0 )
+emitting = false
+amount = 40
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.4
+process_material = ExtResource( 5 )
+texture = ExtResource( 6 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="artemist" type="Particles2D" parent="."]
+modulate = Color( 0.517647, 0.129412, 0.219608, 1 )
+emitting = false
+amount = 30
+lifetime = 1.2
+local_coords = false
+process_material = SubResource( 4 )
+texture = ExtResource( 6 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+volume_db = -5.0
+pitch_scale = 0.9
+autoplay = true
+bus = "sfx"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_HitTimer_timeout"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

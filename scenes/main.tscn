@@ -1,0 +1,184 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/spawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/terrain/grass.png" type="Texture" id=4]
+[ext_resource path="res://assets/blood_wo.png" type="Texture" id=5]
+[ext_resource path="res://assets/terrain/Stones.png" type="Texture" id=6]
+[ext_resource path="res://assets/terrain/tuft.png" type="Texture" id=7]
+[ext_resource path="res://assets/terrain/shadow.png" type="Texture" id=8]
+[ext_resource path="res://assets/terrain/ring.png" type="Texture" id=9]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/start_screen.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/sounds/SFX/wind.ogg" type="AudioStream" id=12]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 192.208
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 2
+emission_box_extents = Vector3( 30, 1, 1 )
+flag_disable_z = true
+spread = 120.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.5
+angular_velocity = 1.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel_random = 1.0
+scale = 0.7
+scale_random = 0.5
+hue_variation_random = 0.4
+
+[node name="main" type="Node2D" groups=[
+"save",
+]]
+script = ExtResource( 1 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 360, 240 )
+
+[node name="spawner" parent="." instance=ExtResource( 3 )]
+
+[node name="arena" type="Area2D" parent="."]
+position = Vector2( 360, 240 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="arena"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="arena"]
+self_modulate = Color( 0.847059, 0.847059, 0.847059, 0.784314 )
+scale = Vector2( 2.5, 2.5 )
+z_index = -2
+texture = ExtResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+modulate = Color( 0.301961, 0.568627, 0.117647, 1 )
+position = Vector2( 159.895, -61.2105 )
+rotation = -0.116524
+z_index = 1
+amount = 90
+lifetime = 5.0
+process_material = SubResource( 2 )
+texture = ExtResource( 5 )
+
+[node name="floor" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 117.895, 120 )
+z_index = -3
+
+[node name="column1" type="Sprite" parent="floor"]
+
+[node name="Sprite" type="Sprite" parent="floor/column1"]
+texture = ExtResource( 6 )
+
+[node name="Sprite2" type="Sprite" parent="floor/column1"]
+position = Vector2( 0, 256 )
+texture = ExtResource( 6 )
+
+[node name="column2" type="Sprite" parent="floor"]
+position = Vector2( 256, 0 )
+
+[node name="Sprite" type="Sprite" parent="floor/column2"]
+texture = ExtResource( 6 )
+
+[node name="Sprite2" type="Sprite" parent="floor/column2"]
+position = Vector2( 0, 256 )
+texture = ExtResource( 6 )
+
+[node name="column3" type="Sprite" parent="floor"]
+position = Vector2( 512, 0 )
+
+[node name="Sprite" type="Sprite" parent="floor/column3"]
+texture = ExtResource( 6 )
+
+[node name="Sprite2" type="Sprite" parent="floor/column3"]
+position = Vector2( 0, 256 )
+texture = ExtResource( 6 )
+
+[node name="grass" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.862745 )
+z_index = -2
+
+[node name="Sprite" type="Sprite" parent="grass"]
+modulate = Color( 0.839216, 1, 0.980392, 0.862745 )
+position = Vector2( 143.685, 15.7895 )
+scale = Vector2( 1.53454, 1 )
+texture = ExtResource( 4 )
+
+[node name="Sprite2" type="Sprite" parent="grass"]
+modulate = Color( 1, 1, 1, 0.862745 )
+position = Vector2( 693.158, 110.526 )
+scale = Vector2( 1.53454, 1 )
+texture = ExtResource( 4 )
+
+[node name="Sprite3" type="Sprite" parent="grass"]
+modulate = Color( 0.882353, 0.882353, 0.882353, 0.862745 )
+position = Vector2( 188.421, 461.579 )
+scale = Vector2( 1.21382, 1.25493 )
+texture = ExtResource( 4 )
+
+[node name="tuft" type="Sprite" parent="grass"]
+position = Vector2( 634.737, 327.368 )
+texture = ExtResource( 7 )
+
+[node name="tuft2" type="Sprite" parent="grass"]
+modulate = Color( 0.815686, 0.815686, 0.815686, 1 )
+position = Vector2( 588.421, 420 )
+rotation = -0.941056
+texture = ExtResource( 7 )
+
+[node name="tuft3" type="Sprite" parent="grass"]
+position = Vector2( 513.59, 64.7496 )
+rotation = 0.129593
+scale = Vector2( 1.63325, 1 )
+texture = ExtResource( 7 )
+
+[node name="tuft4" type="Sprite" parent="grass"]
+position = Vector2( 86.8007, 160.659 )
+rotation = 1.74446
+scale = Vector2( 1.42577, 1 )
+texture = ExtResource( 7 )
+
+[node name="shadow" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.176471 )
+position = Vector2( 577.368, 388.421 )
+scale = Vector2( 0.433333, 0.224561 )
+texture = ExtResource( 8 )
+
+[node name="shadow2" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.156863 )
+position = Vector2( 145.789, 222.105 )
+scale = Vector2( 0.310526, 0.161404 )
+texture = ExtResource( 8 )
+
+[node name="shadow3" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.156863 )
+position = Vector2( 461.579, 81.5789 )
+scale = Vector2( 0.478948, 0.173684 )
+texture = ExtResource( 8 )
+
+[node name="ring" type="Sprite" parent="."]
+modulate = Color( 1, 0.317647, 0.317647, 0.117647 )
+position = Vector2( 357.895, 240.526 )
+scale = Vector2( 3, 3 )
+z_index = -2
+texture = ExtResource( 9 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 10 )]
+
+[node name="start_screen" parent="CanvasLayer" instance=ExtResource( 11 )]
+
+[node name="wind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -3.0
+autoplay = true
+bus = "sfx"
