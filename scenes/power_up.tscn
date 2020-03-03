@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/items/powerup_1.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 120.402
+radius = 162.368
 
 [node name="power_up" type="Node2D" groups=[
 "power_up",
@@ -18,11 +18,11 @@ Sounds = ExtResource( 2 )
 
 [node name="glow" type="Sprite" parent="Area2D"]
 modulate = Color( 0.843137, 0.466667, 0.133333, 0.784314 )
-scale = Vector2( 5.5, 5.5 )
+scale = Vector2( 6.2, 6.2 )
 texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
-scale = Vector2( 0.4, 0.4 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -33,6 +33,5 @@ shape = SubResource( 1 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 8.0
 autostart = true
-
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
