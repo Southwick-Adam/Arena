@@ -30,12 +30,16 @@ func _game_over():
 	_music(1)
 
 func _on_start_btn_pressed():
+	get_node("/root/main").games_played_no_ad += 1
 	get_node("/root/main/spawner")._new_game()
 	get_node("/root/main/CanvasLayer/HUD").score = 0
 	get_node("/root/main/CanvasLayer/HUD")._new_game()
 	get_node("/root/main/player")._new_game(5)
 	_new_hiscore_hide()
 	_music(2)
+	if get_node("/root/main/InterstitialTimer").time_left == 0:
+		get_node("/root/main/InterstitialTimer").start()
+	get_node("/root/main/spawner")._reset_diff()
 	hide()
 
 func _on_score_btn_pressed():

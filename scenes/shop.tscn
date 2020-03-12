@@ -234,5 +234,6 @@ position = Vector2( -162.174, 250.163 )
 scale = Vector2( 2.29947, 0.768532 )
 z_index = -1
 texture = ExtResource( 4 )
+[connection signal="pressed" from="no ads" to="." method="_on_no_ads_pressed"]
 [connection signal="pressed" from="x" to="." method="_on_x_pressed"]
 [connection signal="pressed" from="info" to="." method="_on_info_pressed"]

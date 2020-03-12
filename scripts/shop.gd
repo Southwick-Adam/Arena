@@ -23,3 +23,6 @@ func _on_info_pressed():
 	else:
 		info = true
 		$labels.show()
+
+func _on_no_ads_pressed():
+	get_node("/root/main").ads_allowed = false

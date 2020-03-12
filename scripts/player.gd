@@ -262,6 +262,7 @@ func _game_over():
 	for ult in ults:
 		ult.queue_free()
 	$flame.hide()
+	$point.hide()
 	$Xbow/bolt.modulate.a = 1
 	ult_activated = false
 	HUD._game_over()
@@ -276,6 +277,7 @@ func _game_over():
 	var node = Blood.instance()
 	get_node("/root/main/player").add_child(node)
 	node.set_global_position(global_position)
+	get_node("/root/main/DifficultyTimer").stop()
 
 func _new_game(num):
 	set_physics_process(true)
@@ -286,6 +288,7 @@ func _new_game(num):
 	modulate = Color(1,1,1)
 	health = num
 	game_over = false
+	get_node("/root/main/DifficultyTimer").start()
 
 func _trigger_temple():
 	get_node("/root/main/temple")._remember(ult_type)

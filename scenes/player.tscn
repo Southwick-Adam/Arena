@@ -209,8 +209,9 @@ process_material = SubResource( 5 )
 texture = ExtResource( 19 )
 
 [node name="point" type="Sprite" parent="."]
-modulate = Color( 0.827451, 0.282353, 0.282353, 0.333333 )
-position = Vector2( 0, 160 )
+visible = false
+modulate = Color( 0.827451, 0.282353, 0.282353, 0.54902 )
+position = Vector2( 0, 172 )
 rotation = 3.14159
 scale = Vector2( 1.2, 1.5 )
 texture = ExtResource( 20 )

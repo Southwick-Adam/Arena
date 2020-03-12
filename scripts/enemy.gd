@@ -1,13 +1,15 @@
 extends Node2D
 
-onready var SPEED = rand_range(50,120)
+var min_speed = 50
 var screen_size
 var velocity = Vector2()
 var stop = false
 var DeathTimer = 0.6
 var dead = false
 var game_over = false
-var reload_timer = .25
+var attack_max = 5
+
+onready var SPEED = rand_range(min_speed,120)
 
 export (PackedScene) var Bolt
 
@@ -71,13 +73,9 @@ func _physics_process(delta):
 			velocity = velocity.normalized() * SPEED
 			position += velocity * delta
 #RELOAD
-		if $Area2D/Sprite/Xbow/Sprite.texture == preload("res://assets/weapon/Xbow.png"):
-			reload_timer -= delta
-		if reload_timer <= 0:
+		if $AttackTimer.time_left < 1.2 and $Area2D/Sprite/Xbow/Sprite.texture == preload("res://assets/weapon/Xbow.png"):
 			$Area2D/Sprite/Xbow/Sprite.texture = preload("res://assets/weapon/Xbow2.png")
 			$Area2D/Sprite/Xbow/bolt.show()
-			reload_timer = .25
-		
 	else:
 #DEATH
 		DeathTimer -= delta
@@ -117,7 +115,7 @@ func _shoot():
 	bolt._type(2)
 	bolt._go(rotation - PI/40)
 	bolt.rotation = (rotation - PI/40)
-	$AttackTimer.set_wait_time(rand_range(2, 5))
+	$AttackTimer.set_wait_time(rand_range(2,attack_max))
 	$AttackTimer.start()
 	$Area2D/Sprite/Xbow/Sprite.texture = preload("res://assets/weapon/Xbow.png")
 	$Area2D/Sprite/Xbow/bolt.hide()
@@ -151,3 +149,8 @@ func _on_RespawnBoltTimer_timeout():
 
 func _on_AuraTimer_timeout():
 	$Area2D/Sprite/aura.hide()
+
+func _inc_difficulty():
+	attack_max -= 0.12
+	if min_speed < 100:
+		min_speed += 8

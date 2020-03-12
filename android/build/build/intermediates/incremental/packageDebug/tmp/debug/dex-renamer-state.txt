@@ -1,0 +1,4 @@
+#Wed Mar 04 15:18:59 EST 2020
+base.0=C\:\\Users\\Adam\\Downloads\\game dev\\projects\\Arena-master\\android\\build\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex

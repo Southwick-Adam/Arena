@@ -12,6 +12,11 @@ var chosen_type = 0
 var sfx = true
 var music = true
 
+var Interstitial_ready = false
+var ads_allowed = true
+
+var games_played_no_ad = 0
+
 func _ready():
 	$player.position = screen_size/2
 	$arena.position = screen_size/2
@@ -60,3 +65,9 @@ func _save():
 		}
 	}
 	return save_dict
+
+func _on_InterstitialTimer_timeout():
+	Interstitial_ready = true
+
+func _on_DifficultyTimer_timeout():
+	get_node("spawner")._inc_difficulty()

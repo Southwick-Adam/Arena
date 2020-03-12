@@ -50,3 +50,10 @@ func _game_over():
 func _new_game():
 	$EnemyTimer.start()
 	$ItemTimer.start()
+
+func _inc_difficulty():
+	if two_chance > .1:
+		two_chance -= .08
+
+func _reset_diff():
+	two_chance = 0.8

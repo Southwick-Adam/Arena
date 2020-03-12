@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/start_screen.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sounds/SFX/wind.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/UI/fonts/GlacialIndifference-Italic.otf" type="DynamicFontData" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 178.515
@@ -32,6 +33,10 @@ radial_accel_random = 1.0
 scale = 0.7
 scale_random = 0.5
 hue_variation_random = 0.4
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 13 )
 
 [node name="main" type="Node2D" groups=[
 "save",
@@ -164,7 +169,7 @@ scale = Vector2( 0.478948, 0.173684 )
 texture = ExtResource( 8 )
 
 [node name="ring" type="Sprite" parent="."]
-modulate = Color( 1, 0.317647, 0.317647, 0.117647 )
+modulate = Color( 1, 0.317647, 0.317647, 0.235294 )
 position = Vector2( 357.895, 240.526 )
 scale = Vector2( 2.85, 2.85 )
 z_index = -2
@@ -181,3 +186,26 @@ stream = ExtResource( 12 )
 volume_db = -3.0
 autoplay = true
 bus = "sfx"
+
+[node name="InterstitialTimer" type="Timer" parent="."]
+wait_time = 40.0
+one_shot = true
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 224.054
+margin_top = 409.615
+margin_right = 382.054
+margin_bottom = 508.615
+custom_fonts/font = SubResource( 3 )
+text = "
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+[connection signal="timeout" from="InterstitialTimer" to="." method="_on_InterstitialTimer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]

@@ -13,6 +13,10 @@ _global_script_class_icons={
 
 }
 
+[android]
+
+modules="org/godotengine/godot/GodotAdMob"
+
 [application]
 
 config/name="shield"
@@ -22,6 +26,7 @@ config/icon="res://assets/crown.png"
 [autoload]
 
 data="*res://scripts/data.gd"
+Admanager="*res://scripts/Admanager.gd"
 
 [debug]
 

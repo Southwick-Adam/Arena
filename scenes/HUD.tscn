@@ -43,7 +43,7 @@ scale_curve = SubResource( 2 )
 color = Color( 0.278431, 0.0705882, 0.0705882, 1 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 42, 41 )
+extents = Vector2( 50, 50 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 24
@@ -234,7 +234,7 @@ margin_bottom = 450.0
 alignment = 2
 
 [node name="buttons" type="VBoxContainer" parent="MC/bottomR"]
-margin_left = 615.0
+margin_left = 595.0
 margin_right = 695.0
 margin_bottom = 450.0
 alignment = 2
@@ -242,10 +242,10 @@ alignment = 2
 [node name="ult" type="NinePatchRect" parent="MC/bottomR/buttons"]
 visible = false
 self_modulate = Color( 1, 1, 1, 0.45098 )
-margin_top = 202.0
-margin_right = 80.0
-margin_bottom = 282.0
-rect_min_size = Vector2( 80, 80 )
+margin_top = 128.0
+margin_right = 100.0
+margin_bottom = 228.0
+rect_min_size = Vector2( 100, 100 )
 mouse_filter = 1
 texture = ExtResource( 8 )
 
@@ -253,22 +253,25 @@ texture = ExtResource( 8 )
 self_modulate = Color( 1, 1, 1, 0.54902 )
 margin_right = 80.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 80, 80 )
+rect_min_size = Vector2( 100, 100 )
 mouse_filter = 1
 texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ult_bttn" type="TouchScreenButton" parent="MC/bottomR/buttons/ult"]
-position = Vector2( 39.1228, 39.4697 )
+position = Vector2( 49.2837, 48.7838 )
 shape = SubResource( 4 )
 shape_centered = false
 
 [node name="ult_bar" type="NinePatchRect" parent="MC/bottomR/buttons"]
 modulate = Color( 1, 1, 1, 0.45098 )
 self_modulate = Color( 0.698039, 0.698039, 0.698039, 1 )
-margin_left = 5.0
-margin_top = 272.0
-margin_right = 74.0
-margin_bottom = 282.0
+margin_left = 15.0
+margin_top = 232.0
+margin_right = 84.0
+margin_bottom = 242.0
 rect_min_size = Vector2( 69, 10 )
 size_flags_horizontal = 4
 texture = ExtResource( 6 )
@@ -284,20 +287,20 @@ region_rect = Rect2( 1049, 86, 0, 1 )
 
 [node name="bolt" type="NinePatchRect" parent="MC/bottomR/buttons"]
 self_modulate = Color( 0.305882, 0.768627, 0.831373, 0.45098 )
-margin_top = 286.0
-margin_right = 80.0
-margin_bottom = 366.0
-rect_min_size = Vector2( 80, 80 )
+margin_top = 246.0
+margin_right = 100.0
+margin_bottom = 346.0
+rect_min_size = Vector2( 100, 100 )
 mouse_filter = 1
 texture = ExtResource( 8 )
 
 [node name="icon" type="NinePatchRect" parent="MC/bottomR/buttons/bolt"]
 self_modulate = Color( 1, 1, 1, 0.54902 )
-margin_left = 10.8301
-margin_top = 9.92749
-margin_right = 70.8301
-margin_bottom = 69.9275
-rect_min_size = Vector2( 60, 60 )
+margin_left = 9.9833
+margin_top = 9.92746
+margin_right = 89.9833
+margin_bottom = 89.9275
+rect_min_size = Vector2( 80, 80 )
 mouse_filter = 1
 texture = ExtResource( 10 )
 __meta__ = {
@@ -305,22 +308,26 @@ __meta__ = {
 }
 
 [node name="bolt_bttn" type="TouchScreenButton" parent="MC/bottomR/buttons/bolt"]
+position = Vector2( -0.846741, 0.846741 )
 shape = SubResource( 4 )
 
 [node name="shield" type="NinePatchRect" parent="MC/bottomR/buttons"]
 self_modulate = Color( 0.305882, 0.768627, 0.831373, 0.45098 )
-margin_top = 370.0
-margin_right = 80.0
+margin_top = 350.0
+margin_right = 100.0
 margin_bottom = 450.0
-rect_min_size = Vector2( 80, 80 )
+rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 8 )
 
 [node name="icon" type="NinePatchRect" parent="MC/bottomR/buttons/shield"]
 self_modulate = Color( 1, 1, 1, 0.54902 )
 margin_right = 40.0
 margin_bottom = 40.0
-rect_min_size = Vector2( 80, 80 )
+rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="shield_bttn" type="TouchScreenButton" parent="MC/bottomR/buttons/shield"]
 shape = SubResource( 4 )
